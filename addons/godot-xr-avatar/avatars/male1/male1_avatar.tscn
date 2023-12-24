@@ -1,0 +1,96 @@
+[gd_scene load_steps=3 format=3 uid="uid://osnbnoehtlmg"]
+
+[ext_resource type="PackedScene" uid="uid://brk13hp1ugn4c" path="res://addons/godot-xr-avatar/avatars/male1/model/male_avatar.gltf" id="1_hib1p"]
+[ext_resource type="Script" path="res://addons/godot-xr-avatar/scripts/avatar.gd" id="2_mh1tc"]
+
+[node name="Male1Avatar" node_paths=PackedStringArray("face_meshes", "hand_meshes", "rig", "spine_ik", "left_arm_ik", "right_arm_ik", "left_leg_ik", "right_leg_ik", "head_target", "left_hand_target", "right_hand_target", "left_foot_target", "right_foot_target") instance=ExtResource("1_hib1p")]
+script = ExtResource("2_mh1tc")
+height_pelvis = 1.002
+height_head = 1.686
+face_meshes = [NodePath("Armature/Skeleton3D/Eyes"), NodePath("Armature/Skeleton3D/Head")]
+hand_meshes = [NodePath("Armature/Skeleton3D/Hand_L"), NodePath("Armature/Skeleton3D/Hand_R")]
+rig = NodePath("Armature")
+spine_ik = NodePath("Armature/Skeleton3D/Spine")
+left_arm_ik = NodePath("Armature/Skeleton3D/LeftArm")
+right_arm_ik = NodePath("Armature/Skeleton3D/RightArm")
+left_leg_ik = NodePath("Armature/Skeleton3D/LeftLeg")
+right_leg_ik = NodePath("Armature/Skeleton3D/RightLeg")
+head_target = NodePath("Head")
+left_hand_target = NodePath("LeftHand")
+right_hand_target = NodePath("RightHand")
+left_foot_target = NodePath("LeftFoot")
+right_foot_target = NodePath("RightFoot")
+
+[node name="Eyes" parent="Armature/Skeleton3D" index="1"]
+layers = 2
+
+[node name="Head" parent="Armature/Skeleton3D" index="4"]
+layers = 2
+
+[node name="Spine" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="5"]
+process_priority = 1
+root_bone = &"Root"
+tip_bone = &"head"
+target_node = NodePath("../../../Head/Target")
+
+[node name="LeftArm" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="6"]
+process_priority = 1
+root_bone = &"upperarm_l"
+tip_bone = &"hand_l"
+use_magnet = true
+magnet = Vector3(-2, 1, 1)
+target_node = NodePath("../../../LeftHand/Target")
+
+[node name="RightArm" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="7"]
+process_priority = 1
+root_bone = &"upperarm_r"
+tip_bone = &"hand_r"
+use_magnet = true
+magnet = Vector3(2, 1, 1)
+target_node = NodePath("../../../RightHand/Target")
+
+[node name="LeftLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="8"]
+process_priority = 1
+root_bone = &"thigh_l"
+tip_bone = &"foot_l"
+use_magnet = true
+magnet = Vector3(-0.3, 1, -2)
+target_node = NodePath("../../../LeftFoot/Target")
+
+[node name="RightLeg" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="9"]
+process_priority = 1
+root_bone = &"thigh_r"
+tip_bone = &"foot_r"
+use_magnet = true
+magnet = Vector3(0.3, 1, -2)
+target_node = NodePath("../../../RightFoot/Target")
+
+[node name="Head" type="Marker3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73438, -0.0798506)
+
+[node name="Target" type="Node3D" parent="Head" index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.0398175, 0.0319544)
+
+[node name="LeftHand" type="Marker3D" parent="." index="2"]
+transform = Transform3D(0.97855, 0.205987, 0.00288357, -0.171756, 0.808046, 0.563526, 0.113749, -0.551934, 0.826093, -0.33, 0.967, -0.354)
+
+[node name="Target" type="Node3D" parent="LeftHand" index="0"]
+transform = Transform3D(-1, 8.74228e-08, 4.37114e-08, -4.37114e-08, 1.91069e-15, -1, -8.74228e-08, -1, 1.91069e-15, -0.03, -0.05, 0.18)
+
+[node name="RightHand" type="Marker3D" parent="." index="3"]
+transform = Transform3D(0.97847, -0.20636, -0.00345756, 0.172383, 0.807925, 0.563508, -0.113492, -0.551972, 0.826103, 0.329903, 0.967396, -0.353705)
+
+[node name="Target" type="Node3D" parent="RightHand" index="0"]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0.03, -0.05, 0.18)
+
+[node name="LeftFoot" type="Marker3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, 0)
+
+[node name="Target" type="Node3D" parent="LeftFoot" index="0"]
+transform = Transform3D(-1, -4.24933e-10, 8.74227e-08, -7.54979e-08, -0.5, -0.866026, 4.40793e-08, -0.866026, 0.5, 0, 0, 0)
+
+[node name="RightFoot" type="Marker3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
+
+[node name="Target" type="Node3D" parent="RightFoot" index="0"]
+transform = Transform3D(-1, -4.24933e-10, 8.74227e-08, -7.54979e-08, -0.5, -0.866026, 4.40793e-08, -0.866026, 0.5, 0, 0, 0)
