@@ -2,7 +2,7 @@ class_name XRAvatarDriver
 extends Node
 
 
-@export var avatar : XRAvatar : set = _set_avatar
+@export var avatar : XRAvatarBase : set = _set_avatar
 
 
 var _body : XRToolsPlayerBody
@@ -13,7 +13,7 @@ var _left_controller : XRController3D
 
 var _right_controller : XRController3D
 
-var _current_avatar : XRAvatar
+var _current_avatar : XRAvatarBase
 
 
 # Called when the node enters the scene tree for the first time.
@@ -43,7 +43,7 @@ func _physics_process(delta):
 	_current_avatar.right_hand_target.global_transform = _right_controller.global_transform
 
 
-func _set_avatar(p_avatar : XRAvatar) -> void:
+func _set_avatar(p_avatar : XRAvatarBase) -> void:
 	# Save the avatar and update if inside tree
 	avatar = p_avatar
 	if is_inside_tree():
