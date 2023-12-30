@@ -1,4 +1,5 @@
-class_name XRAvatarDriver
+@tool
+class_name XRToolsPlayerBodyAvatar
 extends Node
 
 
@@ -16,8 +17,17 @@ var _right_controller : XRController3D
 var _current_avatar : XRAvatarBase
 
 
+# Add support for is_xr_class on XRTools classes
+func is_xr_class(name : String) -> bool:
+	return name == "XRToolsPlayerBodyAvatar"
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Do not initialize if in the editor
+	if Engine.is_editor_hint():
+		return
+
 	# Set physics priority
 	process_physics_priority = -100
 
@@ -59,3 +69,15 @@ func _update_avatar() -> void:
 	_current_avatar = avatar
 	if _current_avatar:
 		_current_avatar.worn = true
+
+
+## Find an [XRToolsPlayerBodyAvatar] node.
+##
+## This function searches from the specified node for an
+## [XRToolsPlayerBodyAvatar] assuming the node is a sibling of the body under
+## an [XROrigin3D].
+static func find_instance(node: Node) -> XRToolsPlayerBodyAvatar:
+	return XRTools.find_xr_child(
+		XRHelpers.get_xr_origin(node),
+		"*",
+		"XRToolsPlayerBodyAvatar") as XRToolsPlayerBodyAvatar
