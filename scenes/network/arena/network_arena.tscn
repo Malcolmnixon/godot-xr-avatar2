@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://s15pa8f3kxsk"]
+
+[ext_resource type="PackedScene" uid="uid://d1ql7lpff7t6i" path="res://addons/godot-xr-avatar/xr-tools/multiplayer_scene_base.tscn" id="1_cq1n7"]
+[ext_resource type="Script" path="res://scenes/network/arena/network_arena.gd" id="2_oqbw1"]
+[ext_resource type="PackedScene" uid="uid://rypqa6qcv0st" path="res://assets/maps/basic_map.tscn" id="3_3efbp"]
+[ext_resource type="PackedScene" uid="uid://3a6wjr3a13vd" path="res://assets/meshes/teleport/teleport.tscn" id="4_bmfbn"]
+[ext_resource type="Texture2D" uid="uid://clnfqn7qj5vmi" path="res://scenes/network/lobby/network lobby.png" id="5_t2vpw"]
+
+[node name="NetworkArena" instance=ExtResource("1_cq1n7")]
+script = ExtResource("2_oqbw1")
+
+[node name="Map" type="Node3D" parent="." index="2"]
+
+[node name="BasicMap" parent="Map" index="0" instance=ExtResource("3_3efbp")]
+
+[node name="ToLobby" parent="Map" index="1" instance=ExtResource("4_bmfbn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+scene = "res://scenes/network/lobby/network_lobby.tscn"
+title = ExtResource("5_t2vpw")
+spawn_point_name = ""
+spawn_point_position = Vector3(0, 0, 0)
+spawn_point_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

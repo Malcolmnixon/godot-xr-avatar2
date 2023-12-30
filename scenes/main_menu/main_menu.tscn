@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://trx486fjeo6m"]
+[gd_scene load_steps=13 format=3 uid="uid://trx486fjeo6m"]
 
 [ext_resource type="PackedScene" uid="uid://vmly2os3wm0d" path="res://scenes/demo_scene_base.tscn" id="1_s12ir"]
 [ext_resource type="PackedScene" uid="uid://b4kad2kuba1yn" path="res://addons/godot-xr-tools/hands/scenes/lowpoly/left_hand_low.tscn" id="2_2keqh"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://osnbnoehtlmg" path="res://addons/godot-xr-avatar/avatars/human/male1_avatar.tscn" id="10_g73au"]
 [ext_resource type="PackedScene" uid="uid://3a6wjr3a13vd" path="res://assets/meshes/teleport/teleport.tscn" id="10_wfufb"]
 [ext_resource type="Texture2D" uid="uid://cjdqjh48u7pim" path="res://scenes/body_swap/body swap.png" id="11_8cwyp"]
+[ext_resource type="Texture2D" uid="uid://clnfqn7qj5vmi" path="res://scenes/network/lobby/network lobby.png" id="12_bf61x"]
 
 [node name="MainMenu" instance=ExtResource("1_s12ir")]
 
@@ -37,9 +38,17 @@ avatar = NodePath("../../Male1Avatar")
 [node name="BasicMap" parent="Map" index="0" instance=ExtResource("8_7ggo2")]
 
 [node name="ToBodySwap" parent="Map" index="1" instance=ExtResource("10_wfufb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -8)
 scene = "res://scenes/body_swap/body_swap.tscn"
 title = ExtResource("11_8cwyp")
+spawn_point_name = ""
+spawn_point_position = Vector3(0, 0, 0)
+spawn_point_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="ToNetworkLobby" parent="Map" index="2" instance=ExtResource("10_wfufb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -8)
+scene = "res://scenes/network/lobby/network_lobby.tscn"
+title = ExtResource("12_bf61x")
 spawn_point_name = ""
 spawn_point_position = Vector3(0, 0, 0)
 spawn_point_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

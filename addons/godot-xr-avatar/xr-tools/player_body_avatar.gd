@@ -26,6 +26,7 @@ func is_xr_class(name : String) -> bool:
 func _ready():
 	# Do not initialize if in the editor
 	if Engine.is_editor_hint():
+		set_physics_process(false)
 		return
 
 	# Set physics priority
@@ -43,7 +44,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if not _current_avatar:
+	if not is_instance_valid(_current_avatar):
 		return
 
 	# Update the current avatar
@@ -62,12 +63,12 @@ func _set_avatar(p_avatar : XRAvatarBase) -> void:
 
 func _update_avatar() -> void:
 	# Stop wearing old avatar
-	if _current_avatar:
+	if is_instance_valid(_current_avatar):
 		_current_avatar.worn = false
 
 	# Wear the new avatar
 	_current_avatar = avatar
-	if _current_avatar:
+	if is_instance_valid(_current_avatar):
 		_current_avatar.worn = true
 
 
